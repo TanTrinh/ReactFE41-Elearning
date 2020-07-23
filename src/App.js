@@ -12,6 +12,9 @@ import CoursesManagement from './pages/CoursesManagement';
 import UserManagement from './pages/UserManagement';
 import AdminRoute from './components/AdminRoute';
 import UserRoute from './components/UserRoute';
+import { ComponentAWithForm, ComponentBWithForm } from './pages/HOC/withForm';
+import Counter from './pages/Hooks/Counter';
+import Form from './pages/Hooks/Form';
 
 function App() {
   return (
@@ -56,6 +59,10 @@ function App() {
             </AdminTemplate>
           )
         }}></Route> */}
+        <Route path="/form-hooks" component={Form}/>
+        <Route path="/counter-hooks" component={Counter}/>
+        <Route path="/hoc-1" component={ComponentAWithForm}/>
+        <Route path="/hoc-2" component={ComponentBWithForm}/>
         <UserRoute exact path="/" component={Home}/>
         <UserRoute path="/courses-list" component={CoursesList}/>
         <UserRoute path="/signin" component={Signin}/>
