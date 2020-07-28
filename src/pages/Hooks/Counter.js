@@ -1,10 +1,21 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react'
 import Hello from './Hello';
+import useCounter from "./useCounter";
+import useToggle from './useToggle';
+import useWindowDimensions from './useWindowDimensions';
 
 export default function Counter() {
 
     const [count, setCount] = useState(0);
     const [toggle, setToggle] = useState(false);
+    // Sử dụng custom hooks counter
+    const [count1, increase, decrease] = useCounter(0);
+    // Sử dụng custom hooks toggle
+    const {toggle: toggle1, handleToggle} = useToggle(false);
+
+    const {width, height} = useWindowDimensions();
+
+    console.log(width, height);
 
     const calPow = () => {
         console.log('calPow');
@@ -71,6 +82,20 @@ export default function Counter() {
             {toggle ? <Hello showMessage={handleShowMessage}/> : null}
             <br/>
             <p>pow: {pow}</p>
+            <br/>
+            <br/>
+            <h1>useCounter</h1>
+            <button onClick={decrease}>Giảm</button>
+            <span className="mx-4">{count1}</span>
+            <button onClick={increase}>Tăng</button>
+            <br/>
+            <br/>
+            <h1>useToggle</h1>
+            <button onClick={handleToggle}>Toggle</button>
+            {toggle1? <Hello showMessage={handleShowMessage}/> : null}
+            <br/>
+            <br/>
+            {width > 400 ? <p>OK</p> : null}
         </div>
     )
 }
