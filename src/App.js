@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter, Switch, Route, Link } from 'react-router-dom'
@@ -15,8 +15,18 @@ import UserRoute from './components/UserRoute';
 import { ComponentAWithForm, ComponentBWithForm } from './pages/HOC/withForm';
 import Counter from './pages/Hooks/Counter';
 import Form from './pages/Hooks/Form';
+import CourseDetail from './pages/CourseDetail';
+
+import { useSelector } from "react-redux";
+import { setToken } from './utils/axiosClient';
 
 function App() {
+  // const { userInfo } = useSelector(state => state.authReducer);
+  // useEffect(() => {
+  //   if (Object.keys(userInfo).length) {
+  //     setToken(userInfo.accessToken);
+  //   }
+  // }, [])
   return (
     <BrowserRouter>
       <Link to="/">Home</Link>
@@ -65,6 +75,7 @@ function App() {
         <Route path="/hoc-2" component={ComponentBWithForm}/>
         <UserRoute exact path="/" component={Home}/>
         <UserRoute path="/courses-list" component={CoursesList}/>
+        <UserRoute path="/course/:id" component={CourseDetail}/>
         <UserRoute path="/signin" component={Signin}/>
         <UserRoute path="/signup" component={Signup}/>
         <AdminRoute path="/courses-management" component={CoursesManagement}/>

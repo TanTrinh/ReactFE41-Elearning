@@ -1,7 +1,8 @@
-import { GET_COURSES_LIST } from "../constants/khoaHocConstants";
+import { GET_COURSES_LIST, GET_COURSE_DETAIL } from "../constants/khoaHocConstants";
 
 const initialState = {
     danhSachKhoaHoc: [],
+    chiTietKhoaHoc: {},
     loading: false,
     error: false,
 };
@@ -20,6 +21,24 @@ const khoaHocReducer = (state = initialState, action) => {
             }
         }
         case GET_COURSES_LIST.FAIL: {
+            return {
+                ...state,
+                loading: false,
+                error: true,
+            }
+        }
+        case GET_COURSE_DETAIL.REQUEST: {
+            return {...state, loading: true, error: false};
+        }
+        case GET_COURSE_DETAIL.SUCCESS: {
+            return {
+                ...state,
+                chiTietKhoaHoc: action.payload.data,
+                loading: false,
+                error: false,
+            }
+        }
+        case GET_COURSE_DETAIL.FAIL: {
             return {
                 ...state,
                 loading: false,
